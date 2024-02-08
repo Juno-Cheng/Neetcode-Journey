@@ -33,5 +33,7 @@ class Solution(object):
             hashMap[i] = 1
         return False
     
-#Accidently Reversed the False/True :3 - Whoops
+    def oneLiner(self,nums):
+        hashMap = {}
 
+#Other Solutions include using set/arrays or comparing values such as len(set) < len(num)
