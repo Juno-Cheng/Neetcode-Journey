@@ -42,7 +42,7 @@ class Solution(object):
             else:
                 hashMap[value] = 1
         
-        return sorted(hashMap, key= lambda x: hashMap[x], reverse=True)[0:k]
+        return sorted(hashMap, key=lambda x: hashMap[x], reverse=True)[0:k]
 
 nums = [1,1,1,2,2,3]
 k = 2
