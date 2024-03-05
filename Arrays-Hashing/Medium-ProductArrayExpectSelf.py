@@ -32,17 +32,3 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        count = len(nums)
-        returnList = [1]*count
-
-        #Left 
-        for i in range(1,count):
-            returnList[i] = nums[i-1] * returnList[i-1]
-
-        #Right
-        right = 1
-        for i in range(count-1, -1, -1):
-            returnList[i] *= right
-            right *= nums[i] 
-    
-        return returnList
