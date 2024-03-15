@@ -1,0 +1,56 @@
+#Default Libraries -------------
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+'''
+36. Valid Sudoku
+
+Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+
+Each row must contain the digits 1-9 without repetition.
+Each column must contain the digits 1-9 without repetition.
+Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+Note:
+
+A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+Only the filled cells need to be validated according to the mentioned rules.
+'''
+
+
+#Attempt 1 
+class Solution(object):
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        """
+
+        def validRow(lst):
+            seen = set()
+            for num in lst:
+                if num != '.':
+                    if num in seen:
+                        return False
+                    seen.add(num)
+            return True
+
+        def validColumn(col):
+            lst = [board[i][col] for i in range(9)]
+            return validRow(lst)
+        
+        def validGrid(row, col):
+            lst = [board[i][j] for i in range(row, row+3) for j in range(col, col+3)]
+            return validRow(lst)
+        
+
+        for i in range(9):
+            if not validRow(board[i]) or not validColumn(i):
+                return False
+            
+        for i in range(0,9,3):
+            for j in range(0,9,3):
+                if not validGrid(i,j):
+                    return False
+        
+        return True

@@ -32,3 +32,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
+        k = len(nums)
+        lst = [1] * k
+        left = 1
+        for i in range(1,k):
+            left *= nums[i-1]
+            lst[i] = left
+        
+        right = 1
+        for i in range(k-2, -1, -1):
+            right *= nums[i+1]
+            lst[i] *= right
+
+        return lst
+
