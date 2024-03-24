@@ -23,24 +23,24 @@ Output: true
 class Solution(object):
     def containsDuplicate1(self, nums):
         if len(set(nums)) == len(nums):
-            return True
-        return False
+            return False
+        return True
     
     def containsDuplicate2(self, nums):
         dupe = []
         for value in nums:
             if value in dupe:
-                return False
+                return True
             dupe.append(value)
-        return True
+        return False
     
     def containsDuplicate3(self, nums):
         hashMap = {}
         for value in nums:
             hashMap[value] = hashMap.get(value, 0) + 1
             if hashMap[value] > 1:
-                return False
-        return True
+                return True
+        return False
     
 
 
