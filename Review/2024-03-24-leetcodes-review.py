@@ -37,6 +37,15 @@ class Solution(object):
         if set(s) != set(t):
             return False
         
-        x,y = sorted(s), sorted(t)
-        return x == y
+        hashMap1, hashMap2 = {},{}
+
+        for i in range(0,len(s)):
+            hashMap1[s[i]] = hashMap1.get(s[i], 0 ) + 1
+            hashMap2[t[i]] = hashMap2.get(t[i], 0 ) + 1
+        
+        return hashMap1 == hashMap2
    
+s = "anagram"
+t = "nagaram"
+x = Solution()
+print(x.isAnagram2(s,t))
