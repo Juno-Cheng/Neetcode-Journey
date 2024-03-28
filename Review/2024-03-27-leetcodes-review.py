@@ -30,7 +30,7 @@ class Solution(object):
                     return [hashMap[target - value],index]
                 hashMap[value] = index
 
-    def twoSum2(self, nums, target):
+    def twoSum2(self, nums, target):  #Slow - O(n^2)
         l=[]
         for i in range(len(nums)):
             for j in range(i+1,len(nums)):
@@ -40,6 +40,6 @@ class Solution(object):
                     break
             if(len(l)>0):
                 break        
-        return l
+        return l#
         
     
