@@ -61,3 +61,13 @@ x = filter(lambda x: (x%2), input)
 print(list(x))
 
 
+'''
+Problem 3: Sum of Digits
+Given a list of integers, use a lambda function with map() to create a new list containing the sum of the digits of each number.
+
+Example Input: [10, 23, 56, 234]
+Expected Output: [1, 5, 11, 9]
+'''
+input = [10, 23, 56, 234]
+x = map(lambda x: sum(list(map(int, list(str(x))))),input)
+print(list(x))
