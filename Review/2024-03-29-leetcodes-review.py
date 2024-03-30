@@ -45,3 +45,19 @@ Given a list of numbers, use a lambda function with map() to double each number 
 Example Input: [1, 2, 3, 4]
 Expected Output: [2, 4, 6, 8]
 '''
+input = [1,2,3,4]
+x = map(lambda x: x*x, input)
+print(list(x))
+
+'''
+Problem 2: Filter Odd Numbers
+Given a list of numbers, use a lambda function with filter() to keep only the odd numbers.
+
+Example Input: [1, 2, 3, 4, 5, 6]
+Expected Output: [1, 3, 5]
+'''
+input = [1, 2, 3, 4, 5, 6]
+x = filter(lambda x: (x%2), input)
+print(list(x))
+
+
