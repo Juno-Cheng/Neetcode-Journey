@@ -32,11 +32,3 @@ Hint: You might want to use set() to find unique lengths and then group strings 
 input = ["hello", "world", "python", "is", "awesome"]
 z = {x: [word for word in input if len(word) == x] for x in set(map(len, input)) }
 
-'''
-Problem: Transform to Dictionary
-Given a list of tuples where each tuple contains a name followed by a score, use a lambda function to transform this list into a dictionary where each key is the name, and the value is the score multiplied by 10 if the score is below 5, and by 5 otherwise.
-
-Example Input: [("Alice", 4), ("Bob", 6), ("Charlie", 2)]
-Expected Output: {"Alice": 40, "Bob": 30, "Charlie": 20}
-
-'''
