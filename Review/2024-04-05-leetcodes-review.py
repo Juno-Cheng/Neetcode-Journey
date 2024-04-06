@@ -26,7 +26,7 @@ Output: [0,0,9,0,0]
 '''
 
 class Solution(object):
-    def productExceptSelf(self, nums):
+    def productExceptSelf1(self, nums):
         n = len(nums)
         left, right, answer = [0]*n, [0]*n, [0]*n
 
@@ -46,10 +46,29 @@ class Solution(object):
         print(left)
         print(right)
         return answer
+    
+    def productExceptSelf2(self, nums):
+        n = len(nums)
+        # Initialize the answer array with 1's since the product of no numbers is 1
+        answer = [1] * n
 
+        # First pass to fill in the products of elements to the left of each element
+        left_accum = 1
+        for i in range(n):
+            answer[i] = left_accum
+            left_accum *= nums[i]
+
+        # Second pass to multiply the products of elements to the right of each element
+        right_accum = 1
+        for i in range(n - 1, -1, -1):
+            answer[i] *= right_accum
+            right_accum *= nums[i]
+
+        return answer
+    
 nums = [1,2,3,4]
 x = Solution()
-print(x.productExceptSelf(nums))
+print(x.productExceptSelf1(nums))
 
 #================== Lambda Practice
 '''
