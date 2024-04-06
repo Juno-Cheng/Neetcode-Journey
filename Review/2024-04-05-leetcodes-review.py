@@ -5,7 +5,51 @@ Date: 2024-04-05
 This file contains review notes and solutions for LeetCode problems.
 """
 
+#Product Expect Self
+'''
+Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
 
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+You must write an algorithm that runs in O(n) time and without using the division operation.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3,4]
+Output: [24,12,8,6]
+Example 2:
+
+Input: nums = [-1,1,0,-3,3]
+Output: [0,0,9,0,0]
+'''
+
+class Solution(object):
+    def productExceptSelf(self, nums):
+        n = len(nums)
+        left, right, answer = [0]*n, [0]*n, [0]*n
+
+        # Calculate left products
+        left[0] = 1
+        for i in range(1, n):
+            left[i] = nums[i - 1] * left[i - 1]
+        
+        # Calculate right products
+        right[n - 1] = 1
+        for i in reversed(range(n - 1)):
+            right[i] = nums[i + 1] * right[i + 1]
+        
+        # Calculate the product of elements except itself
+        for i in range(n):
+            answer[i] = left[i] * right[i]
+        print(left)
+        print(right)
+        return answer
+
+nums = [1,2,3,4]
+x = Solution()
+print(x.productExceptSelf(nums))
 
 #================== Lambda Practice
 '''
