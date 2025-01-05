@@ -20,7 +20,7 @@ import unittest
 ======================================
 Basic Restrictions: 
 No built-in functions - [X]
-No using Data Structures
+No using Data Structures - [?]
 
 Algorithmic Restrictions
 No Sorting: You cannot sort the array to find duplicates.
@@ -45,20 +45,16 @@ Limited Variables: Use only a fixed number of variables, like one or two, to tra
 
 ======================================
 Thought Process:
-- No Built-In Functions
-Since len, set, and sort are restricted, we can use a hashMap to check for duplicatres.
+No using Data Structures - [X]
+Since len, set, and sort are allowed, we don't need to go through the process of creating a DS.
+Easiest way to check it is if the length of the casted set array is the same size as the length of the array
 Time Complexity - O(n)
 Space Complexity - O(n)
 '''
 
 class Solution:
     def hasDuplicate(self, nums) -> bool:
-        hashMap = {}
-        for value in nums:
-            hashMap[value] = hashMap.get(value, 0) + 1
-            if hashMap.get(value) > 1:
-                return True
-        return False
+        return len(nums) != len(set(nums)) 
 
 #Test Cases ======================================
 class UnitTest(unittest.TestCase):
