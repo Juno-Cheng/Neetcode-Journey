@@ -26,36 +26,36 @@ Algorithmic Restrictions
 No Sorting: You cannot sort the array to find duplicates. - [X] - Done in 1.a
 Single Pass: You must solve the problem in a single traversal of the array (O(n) time complexity). - [X] - Done in 1.a
 Constant Space: You cannot use any extra space beyond a few variables (O(1) space complexity).- [X] - Done in 1.b
-Two-Pointer Technique: Restrict yourself to solving the problem using two pointers without creating additional arrays or data structures. - [?]
+Two-Pointer Technique: Restrict yourself to solving the problem using two pointers without creating additional arrays or data structures. - [X] - Done in 1.c
 
 Language/Implementation Restrictions
-No Built-in Comparisons: Avoid using comparison operators (e.g., ==, !=, <, >) for detecting duplicates. - Done in 1.a
-Bit Manipulation Only: Solve the problem using bitwise operations.
+No Built-in Comparisons: Avoid using comparison operators (e.g., ==, !=, <, >) for detecting duplicates. - [X] - Done in 1.a
+Bit Manipulation Only: Solve the problem using bitwise operations. - [?]
 
 Hard Mode
 Write It Recursively: Solve the problem using recursion instead of iteration.
-Simulate Set Operations: Implement a "virtual set" using mathematical or bitwise techniques.
+Simulate Set Operations: Implement a "virtual set" using mathematical or bitwise techniques. - [X] - Done in 1.d
 
 ======================================
 Thought Process:
-Two-Pointer/Reference Technique - [X]
-Since we are forced to make two references - O(1) for each, we can essentially make it so it loops
-We have have one move as one iterates through but that makes it O(n^2), if unsorted
-But we can sort it and do a moving window solution with two pointers O(n)
+Bit Manipulation Only - [X]
+Since we are comparing two values, and we can only use bit manipulation only, we can use XOR to check if there are the same value.
+XOR - same Value = 0
+XOR - No the same = ???
+As such we can compare and sort the array. 
 
 Time Complexity - O(n)
 Space Complexity - O(n)
 '''
 
-class Solution:
+class Solution: #Bitmask + Bitmap could be also used here
     def hasDuplicate(self, nums) -> bool:
-        p1, p2 = 0, 1
+        count = 1
         nums.sort()
-        while p2 < len(nums):
-            if nums[p1] == nums[p2]:  # Check if two consecutive elements are equal
+        while count < len(nums):
+            if (nums[count] ^ nums[count-1]) == 0 :  
                 return True
-            p1 += 1
-            p2 += 1
+            count += 1
         return False 
     
 #Test Cases ======================================

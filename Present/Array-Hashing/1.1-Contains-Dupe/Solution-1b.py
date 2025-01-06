@@ -31,17 +31,10 @@ Two-Pointer Technique: Restrict yourself to solving the problem using two pointe
 Language/Implementation Restrictions
 No Built-in Comparisons: Avoid using comparison operators (e.g., ==, !=, <, >) for detecting duplicates.
 Bit Manipulation Only: Solve the problem using bitwise operations.
-Numeric Constraints: Assume the input contains only non-negative integers, and solve the problem using mathematical properties.
-
-Performance Optimization
-Early Exit: Implement a solution that exits as soon as a duplicate is found.
-Predefined Range: Assume the numbers fall within a specific range (e.g., 1 to 10^5) and use this information creatively.
-Modulus Arithmetic: Use modulus operations to encode and decode the appearance of numbers.
 
 Hard Mode
 Write It Recursively: Solve the problem using recursion instead of iteration.
 Simulate Set Operations: Implement a "virtual set" using mathematical or bitwise techniques.
-Limited Variables: Use only a fixed number of variables, like one or two, to track state (no additional space for flags, arrays, etc.).
 
 ======================================
 Thought Process:
