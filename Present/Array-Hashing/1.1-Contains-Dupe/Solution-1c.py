@@ -19,19 +19,19 @@ import unittest
 '''
 ======================================
 Basic Restrictions: 
-No built-in functions - [?]
-No using Data Structures
+No built-in functions - [X]
+No using Data Structures - [X]
 
 Algorithmic Restrictions
-No Sorting: You cannot sort the array to find duplicates.
-Single Pass: You must solve the problem in a single traversal of the array (O(n) time complexity).
-Constant Space: You cannot use any extra space beyond a few variables (O(1) space complexity).
-Two-Pointer Technique: Restrict yourself to solving the problem using two pointers without creating additional arrays or data structures.
+No Sorting: You cannot sort the array to find duplicates. - [X] - Done in 1.a
+Single Pass: You must solve the problem in a single traversal of the array (O(n) time complexity). - [X] - Done in 1.a
+Constant Space: You cannot use any extra space beyond a few variables (O(1) space complexity).- [X] - Done in 1.b
+Two-Pointer Technique: Restrict yourself to solving the problem using two pointers without creating additional arrays or data structures. - [?]
 
 Language/Implementation Restrictions
-No Built-in Comparisons: Avoid using comparison operators (e.g., ==, !=, <, >) for detecting duplicates.
+No Built-in Comparisons: Avoid using comparison operators (e.g., ==, !=, <, >) for detecting duplicates. - Done in 1.a
 Bit Manipulation Only: Solve the problem using bitwise operations.
-Numeric Constraints: Assume the input contains only non-negative integers, and solve the problem using mathematical properties.
+Numeric Constraints: Assume the input contains only non-negative integers, and solve the problem using mathematical properties. 
 
 Performance Optimization
 Early Exit: Implement a solution that exits as soon as a duplicate is found.
@@ -45,21 +45,26 @@ Limited Variables: Use only a fixed number of variables, like one or two, to tra
 
 ======================================
 Thought Process:
-- No Built-In Functions
-Since len, set, and sort are restricted, we can use a hashMap to check for duplicatres.
+Two-Pointer/Reference Technique - [X]
+Since we are forced to make two references - O(1) for each, we can essentially make it so it loops
+We have have one move as one iterates through but that makes it O(n^2), if unsorted
+But we can sort it and do a moving window solution with two pointers O(n)
+
 Time Complexity - O(n)
 Space Complexity - O(n)
 '''
 
 class Solution:
     def hasDuplicate(self, nums) -> bool:
-        hashMap = {}
-        for value in nums:
-            hashMap[value] = hashMap.get(value, 0) + 1
-            if hashMap.get(value) > 1:
+        p1, p2 = 0, 1
+        nums.sort()
+        while p2 < len(nums):
+            if nums[p1] == nums[p2]:  # Check if two consecutive elements are equal
                 return True
-        return False
-
+            p1 += 1
+            p2 += 1
+        return False 
+    
 #Test Cases ======================================
 class UnitTest(unittest.TestCase):
     def setUp(self):
