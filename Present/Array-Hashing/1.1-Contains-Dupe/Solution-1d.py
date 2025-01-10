@@ -66,9 +66,6 @@ class Solution: #Bitmask + Bitmap could be also used here
             bitmap |= (1 << value)
         return False
             
-
-
-    
 #Test Cases ======================================
 class UnitTest(unittest.TestCase):
     def setUp(self):
