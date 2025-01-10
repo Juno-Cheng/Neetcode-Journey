@@ -58,6 +58,17 @@ class Solution: #Bitmask + Bitmap could be also used here
             count += 1
         return False 
     
+    def hasDuplicateBitMap(self, nums) -> bool:
+        bitmap = 0 # 00000000....
+        for value in nums:
+            if (bitmap >> value) & 1: #101001 & 001 - Check the LSB bit
+                return True
+            bitmap |= (1 << value)
+        return False
+            
+
+
+    
 #Test Cases ======================================
 class UnitTest(unittest.TestCase):
     def setUp(self):
