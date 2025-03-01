@@ -44,11 +44,17 @@ Time Complexity - O(n)
 Space Complexity - O(n)
 '''
 
-class Solution: # Built-In
+class Solution: # Two Pointer
     def hasDuplicate(self, nums) -> bool:
-        if len(nums) != len(set(nums)):
-            return True
-        return False
+        p1, p2 = 0, 1
+        nums.sort()
+        while p2 > len(nums):
+            if nums[p1] == nums[p2]:
+                return True
+            p1 += 1
+            p2 += 2
+        return False 
+
 
 # Test Cases ======================================
 class UnitTest(unittest.TestCase):
