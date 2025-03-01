@@ -46,7 +46,11 @@ Space Complexity - O(n)
 
 class Solution:
     def hasDuplicate(self, nums) -> bool:
-        
+        hashMap = {}
+        for value in nums:
+            hashMap[value] = hashMap.get(value, 0) + 1
+            if hashMap.get(value) > 1:
+                return True
         return False
 
 #Test Cases ======================================
