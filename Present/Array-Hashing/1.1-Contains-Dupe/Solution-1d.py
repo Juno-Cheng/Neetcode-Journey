@@ -44,13 +44,10 @@ Time Complexity - O(n)
 Space Complexity - O(n)
 '''
 
-class Solution: # No Pointer, Loop
+class Solution: # Uses Data Structure - HashMap
     def hasDuplicate(self, nums) -> bool:
-        nums.sort()
-        for count in range(len(nums)-1):
-            if nums[count] == nums[count+1]:
-                return True
-        return False 
+        hashMap = {} # Hashmap Or Dictionary
+        
 
 
 # Test Cases ======================================
