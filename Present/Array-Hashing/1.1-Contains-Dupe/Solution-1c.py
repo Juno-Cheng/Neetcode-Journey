@@ -47,7 +47,6 @@ Space Complexity - O(n)
 class Solution: # No Pointer, Loop
     def hasDuplicate(self, nums) -> bool:
         nums.sort()
-        print(range(len(nums)))
         for count in range(len(nums)-1):
             if nums[count] == nums[count+1]:
                 return True
