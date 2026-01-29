@@ -1,0 +1,128 @@
+---
+description: Standards and guidelines for NeetCode Intro.md file creation
+globs:
+  - "**/Intro.md"
+  - "**/*Intro.md"
+alwaysApply: false
+---
+
+# NeetCode Intro.md Standards
+
+## General Guidelines
+- Keep content brief and concise
+- No emojis in any Intro.md files
+- Maintain consistent structure across all Intro.md files
+- Use clear, professional language
+- Focus on essential information only
+
+## File Structure Template
+
+All Intro.md files must follow this structure:
+
+```markdown
+# [Topic Name]
+
+## Overview
+
+[Brief 1-2 sentence description of what this section covers]
+
+## Topics
+
+### [Topic Name]
+[Difficulty Level]
+
+[2-3 sentence description explaining the topic, its importance, and key concepts]
+
+[Repeat for each topic if multiple topics exist]
+
+## Resources
+
+- [Resource Name - Source](https://link-to-resource.com)
+- [Another Resource - Source](https://link-to-resource.com)
+```
+
+## Section Requirements
+
+### Title (H1)
+- Use the exact topic name as the title
+- Capitalize appropriately (e.g., "Two Pointers", "Array-Hashing", "Stack")
+- No additional formatting or punctuation
+
+### Overview Section
+- Must be 1-2 sentences
+- Describe what the section covers at a high level
+- Keep it general and introductory
+
+### Topics Section
+- Each topic should be a level 3 heading (###)
+- Immediately after the heading, include the difficulty level on its own line:
+  - "Data Structures & Algorithms for Beginners"
+  - "Advanced Algorithms"
+- Follow with 2-3 sentences describing:
+  - What the topic is
+  - Why it's important
+  - Key concepts or applications
+- Keep descriptions concise and informative
+
+### Resources Section
+- Always include a Resources section
+- Format links as: `- [Resource Name - Source](URL)`
+- Include resource name, source (typically GeeksforGeeks), and URL
+- Search for relevant online resources when creating Intro.md files
+- Prioritize authoritative sources (GeeksforGeeks, LeetCode, etc.)
+- Include 3-5 relevant resources per topic
+
+## Content Guidelines
+
+### Writing Style
+- Use present tense
+- Be direct and informative
+- Avoid fluff or unnecessary words
+- Focus on practical applications and importance
+
+### Difficulty Levels
+Use these exact phrases:
+- "Data Structures & Algorithms for Beginners" - for beginner topics
+- "Advanced Algorithms" - for advanced topics
+
+### Resource Links
+- Always search for relevant online resources
+- Prefer GeeksforGeeks for DSA topics
+- Include links to:
+  - Main tutorial pages
+  - Topic-specific guides
+  - Applications and use cases
+  - General DSA tutorials when relevant
+
+## Example Structure
+
+```markdown
+# Stack
+
+## Overview
+
+This section covers the stack data structure and its applications in algorithmic problem-solving.
+
+## Topics
+
+### Stacks
+Data Structures & Algorithms for Beginners
+
+Stacks follow the Last-In-First-Out (LIFO) principle, making them ideal for problems involving nested structures, expression evaluation, and backtracking. Understanding stack operations and their time complexities is essential for solving many coding interview problems.
+
+## Resources
+
+- [Stack Data Structure - GeeksforGeeks](https://www.geeksforgeeks.org/dsa/stack-data-structure/)
+- [Applications of Stack - GeeksforGeeks](https://www.geeksforgeeks.org/dsa/applications-of-stack/)
+- [DSA Tutorial - GeeksforGeeks](https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/)
+```
+
+## Best Practices
+
+1. **Consistency** - Follow the exact structure shown in examples
+2. **Brevity** - Keep descriptions short and to the point
+3. **Clarity** - Use clear, simple language
+4. **Completeness** - Always include Overview, Topics, and Resources sections
+5. **Relevance** - Ensure resources are directly related to the topic
+6. **No Emojis** - Never include emojis in any Intro.md file
+7. **Search First** - Always search for relevant online resources before creating Resources section
