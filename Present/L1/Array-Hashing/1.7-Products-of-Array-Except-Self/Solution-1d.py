@@ -54,42 +54,50 @@ Single Pass: Attempt to minimize the number of passes through the array.
 
 ======================================
 Thought Process:
-- How do we improve our O(n^2) time and O(n) space solution?
+- How do we improve this even further?
 
-Based on the hints, we just need to loop through the array once.
-- But what do we do about each iteration?
+Now that we calculate the prefix & suffix, we multiple them together to get the product of all other elements except for the current element.
+[1,2,4,6]
+[1,1,2,8] - Left Side 
 
-Ok, so based on my experience, I think it would be possible to store each element and index, and then multiple it with the next index.
-- Lets see, since when we go to like index 3 for example, we need to multiple it from 1-2 and 4-6. or some value before and after it.
-- So I think we can store the product of the elements before and after it in a dictionary.
+So 1 for example has no elements before it, so it is 1. 
+2 has 1 before it, so it is 1*1 = 1. 
+4 has 2 before it, so it is 2*1 = 2. 
+
+[48,24,6,1] - Right Side
+
+Start at 6, no elements after it, so it is 1.
+4 has 6 after it, so it is 6*1 = 6.
+2 has 4 after it, so it is 4*6 = 24.
+1 has 2 after it, so it is 2*24 = 48.
+
+[48,24,6,1] * [1,1,2,8] = [48,24,12,8]
+
+I think we can do this by removing a dictionary and do it in the return array itself.
+Ex. [1,2,4,6]
+Return Array: [0,0,0,0]
+Start at 1, no elements before it, so it is 1.
+Return Array: [1,1,2,8] - First Loop with Prefix Products
+
 '''
 
 class Solution: # Built-In
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        startDict = {}
-        endDict = {}
-
-        # Store prefix products: product of all elements BEFORE index i (not including i)
+        returnArr = [0] * len(nums)
+        # Add prefix products: product of all elements BEFORE index i (not including i)
+        # - We dont need to store a predix product variable since we can just use the return array itself.
         for i in range(len(nums)):
             if i == 0:
-                startDict[i] = 1  # No elements before index 0, so product is 1
+                returnArr[i] = 1
             else:
-                startDict[i] = nums[i-1] * startDict[i-1]
-
-        print(startDict)
-
-        # Store suffix products: product of all elements AFTER index i (not including i)
+                returnArr[i] = nums[i-1] * returnArr[i-1]
+        
+        # Multiply suffix products: product of all elements AFTER index i (not including i)
+        # - We need to store a suffix product variable since we need to multiply it with the return array itself.
+        suffixProduct = 1
         for i in range(len(nums)-1, -1, -1):
-            if i == len(nums)-1:
-                endDict[i] = 1  # No elements after last index, so product is 1
-            else:
-                endDict[i] = nums[i+1] * endDict[i+1]
-
-        # Make the ReturnArray: multiply prefix and suffix products
-        returnArr = [0] * len(nums)
-        for i in range(len(nums)):
-            returnArr[i] = startDict[i] * endDict[i]
-
+            returnArr[i] *= suffixProduct
+            suffixProduct *= nums[i]
         return returnArr
 
 
