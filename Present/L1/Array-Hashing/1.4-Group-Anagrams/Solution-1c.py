@@ -84,7 +84,18 @@ class Solution: # Built-In
             group_dict[str(char_dict)].append(string)
 
         return list(group_dict.values())
-            
+
+'''
+Note to Self:
+This is like our C Class with Darrell Long.
+This is the same pattern as bitwise manipulation and bitmasking.
+
+Store [True, False, True, False, False, True, False, False] (8 booleans = ~8 bytes)
+Store 0b10100100 (8 bits = 1 byte)
+
+We can use this to store the frequency of the characters in the string.
+It is simply a form of state representation, but instead of using booleans, we use integers. 0/1 to 0-25 for the characters a-z.
+'''
 
         
 
