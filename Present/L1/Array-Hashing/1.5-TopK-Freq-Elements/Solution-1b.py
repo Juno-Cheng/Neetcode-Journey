@@ -94,15 +94,22 @@ class Solution: # Built-In
             numDict[num] = numDict.get(num, 0) + 1
         
         # Push the elements into the heap - O(n log n) time
+        '''
         for num, freq in numDict.items():
             heapq.heappush(heap, (-freq, num))
+        '''
+
+        #Actually We can Call on Heapify to Sort the Elements by their Frequencies in O(m) time. Where m is the number of unique elements in the array.
+        heap = heapq.heapify(numDict.items())
         
         returnArray = [0] * k
-        # Pop the top k elements from the heap
+        # Pop the top k elements from the heap - k log n time - Which is better than n log n time in 
         for i in range(k):
             returnArray[i] = heapq.heappop(heap)[1]
         
         return returnArray 
+
+        # This is better than 1a because instead of O(n log n) time, we have O(k log n) time.
 
         
 
