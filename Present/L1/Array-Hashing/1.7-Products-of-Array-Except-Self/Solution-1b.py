@@ -62,6 +62,23 @@ Based on the hints, we just need to loop through the array once.
 Ok, so based on my experience, I think it would be possible to store each element and index, and then multiple it with the next index.
 - Lets see, since when we go to like index 3 for example, we need to multiple it from 1-2 and 4-6. or some value before and after it.
 - So I think we can store the product of the elements before and after it in a dictionary.
+
+[1,2,4,6]
+[1,1,2,8] - Left Side 
+
+So 1 for example has no elements before it, so it is 1. 
+2 has 1 before it, so it is 1*1 = 1. 
+4 has 2 before it, so it is 2*1 = 2. 
+
+[48,24,6,1] - Right Side
+
+Start at 6, no elements after it, so it is 1.
+4 has 6 after it, so it is 6*1 = 6.
+2 has 4 after it, so it is 4*6 = 24.
+1 has 2 after it, so it is 2*24 = 48.
+
+[48,24,6,1] * [1,1,2,8] = [48,24,12,8]
+
 '''
 
 class Solution: # Built-In

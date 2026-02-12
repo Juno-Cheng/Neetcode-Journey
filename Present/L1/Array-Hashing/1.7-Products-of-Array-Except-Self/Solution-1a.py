@@ -55,26 +55,26 @@ Single Pass: Attempt to minimize the number of passes through the array.
 
 ======================================
 Thought Process:
-- Prefix and Suffix Products Approach
-For each position i, we need the product of all elements before i (prefix) and all elements after i (suffix).
-First pass: Calculate prefix products from left to right and store in output array.
-Second pass: Calculate suffix products from right to left and multiply with existing prefix products.
-This avoids division and handles zeros correctly.
+Lets go for the naive solution first:
+- This is a O(n^2) time and O(n) space solution.
+- We store a return array of the same length as the input array.
 
-Alternative: Two Arrays Approach
-Use separate arrays for prefix and suffix products, then multiply corresponding elements.
-Time Complexity - O(n) where n is the length of the array (two passes)
-Space Complexity - O(n) for the output array, O(1) extra space if we optimize
-
-Optimized: Single Array with Running Product
-Use the output array to store prefix products, then use a running variable for suffix products.
-Time Complexity - O(n) where n is the length of the array (two passes)
-Space Complexity - O(1) extra space (output array doesn't count)
+- We loop through the array and for each element, we loop through the array again and multiply the elements together except for the current element.
 '''
 
 class Solution: # Built-In
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        pass
+        returnArr = [0] * len(nums)
+        for i in range(len(nums)):
+            product = 1
+            for j in range(len(nums)):
+                if i != j:
+                    product *= nums[j]
+            
+            returnArr[i] = product
+        
+        return returnArr
+
 
 
 # Test Cases ======================================

@@ -94,15 +94,26 @@ class Solution: # Built-In
     
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         numDict = {}
-        
         returnArray = [0] * k
         
-        # Count frequencies
+        # Count frequencies of the elements in the array - O(n) time into a dictionary.
         for num in nums:
             numDict[num] = numDict.get(num, 0) + 1
         
         # Turn Into Bucket Sort - Use a dictionary to store the frequencies of the elements in the array.
+        bucketDict = {}
+        for num, freq in numDict.items():
+            bucketDict[freq] = bucketDict.get(freq, [])
+            bucketDict[freq].append(num)
         
+        # Begin from len(nums) and go down to 0, and add the elements to the returnArray. or Max(.values())
+        for i in range(len(nums), 0, -1):
+            if i in bucketDict:
+                returnArray.extend(bucketDict[i])
+                if len(returnArray) >= k:
+                    break
+        
+        return returnArray
 
 # Test Cases ======================================
 class UnitTest(unittest.TestCase):
