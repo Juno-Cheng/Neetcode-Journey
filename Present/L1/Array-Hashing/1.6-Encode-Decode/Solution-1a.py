@@ -1,4 +1,4 @@
-#https://leetcode.com/problems/top-k-frequent-elements/description/
+#https://leetcode.com/problems/encode-and-decode-strings/description/
 '''
 Design an algorithm to encode a list of strings to a string. 
 The encoded string is then sent over the network and is decoded back to the original list of strings.
@@ -69,31 +69,31 @@ Topics:
 #Default Libraries ------------- Try to get 99% Percentile Time/Space
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import unittest
 from typing import List
 
 '''
 ======================================
 Basic Restrictions: 
-Built-In Functions Allowed: Use Python's built-in sorted() function and dictionary operations.
-Data Structures Allowed: Dictionaries/hash maps are permitted for grouping anagrams.
+Built-In Functions Allowed: Basic string operations (concatenation, slicing, length), integer conversion, and list operations are permitted.
+Data Structures Allowed: Strings and lists are permitted for encoding and decoding.
 
 Algorithmic Restrictions
-Sorting Allowed: You can sort strings to create keys for grouping anagrams.
-Hash Map Approach: Use a dictionary where keys are sorted character strings and values are lists of anagrams.
-Single Pass: Group all anagrams in a single traversal of the input array.
+Length-Prefix Encoding: Use length-prefix encoding where each string is encoded as "length#string".
+Delimiter Design: Use a delimiter (like '#') that separates the length from the string content.
+Single Pass Encoding: Encode all strings in a single pass through the input list.
+Single Pass Decoding: Decode all strings in a single pass through the encoded string.
 
 Language/Implementation Restrictions
-String Sorting: Use sorted(string) to create a sorted character list, then join to create a hashable key.
-Dictionary Grouping: Use dictionary.setdefault() or if/else to group strings by their sorted character key.
-List Return: Return all groups (dictionary values) as a list of lists.
+String Encoding: Encode each string as "length#string" format.
+String Decoding: Parse the encoded string by reading length, then extracting that many characters.
+Handle Empty Strings: Ensure empty strings are correctly encoded and decoded (e.g., "0#").
+Handle Special Characters: The encoding must work with any ASCII characters, including those that might conflict with delimiters.
 
 Hard Mode
-No Built-In Sort: Implement character counting using arrays or dictionaries instead of sorting.
-Character Counting: Use ord() to count character frequencies with a fixed-size array (26 for lowercase).
-Tuple Keys: Convert character count arrays to tuples for hashable dictionary keys.
-No Dictionary: Use alternative data structures for grouping.
+No Delimiter Conflicts: Ensure the delimiter choice doesn't conflict with string content (length-prefix solves this).
+Minimal Encoding Overhead: Minimize the space used for encoding metadata.
+Efficient Parsing: Parse multi-digit lengths correctly (e.g., "10#helloworld" not "1#0#helloworld").
 
 ======================================
 Thought Process:
@@ -111,10 +111,16 @@ Decode:
 
 class Solution: # Built-In
     def encode(self, strs: List[str]) -> str:
-        pass
+        encoded_string = ""
+        for word in strs:
+            length = len(word)
+            encoded_word = f"{length}#{word}"
+            encoded_string += encoded_word
+        return encoded_string
 
     def decode(self, s: str) -> List[str]:
         pass
+
 # Test Cases ======================================
 class UnitTest(unittest.TestCase):
     def setUp(self):
@@ -122,61 +128,64 @@ class UnitTest(unittest.TestCase):
         self.solution = Solution()
     
     def test_basic_example_1(self):
-        nums, k = [1, 2, 2, 3, 3, 3], 2
-        result = self.solution.topKFrequent(nums, k)
-        # Sort result for comparison (order doesn't matter)
-        result.sort()
-        expected = [2, 3]
-        expected.sort()
-        self.assertEqual(result, expected, "Should return top 2 most frequent elements")
+        strs = ["Hello", "World"]
+        encoded = self.solution.encode(strs)
+        decoded = self.solution.decode(encoded)
+        self.assertEqual(decoded, strs, "Should encode and decode basic example correctly")
     
     def test_basic_example_2(self):
-        nums, k = [7, 7], 1
-        result = self.solution.topKFrequent(nums, k)
-        self.assertEqual(result, [7], "Should return single most frequent element")
+        strs = [""]
+        encoded = self.solution.encode(strs)
+        decoded = self.solution.decode(encoded)
+        self.assertEqual(decoded, strs, "Should handle empty string in list")
     
-    def test_single_element(self):
-        nums, k = [1], 1
-        result = self.solution.topKFrequent(nums, k)
-        self.assertEqual(result, [1], "Should handle single element")
+    def test_empty_list(self):
+        strs = []
+        encoded = self.solution.encode(strs)
+        decoded = self.solution.decode(encoded)
+        self.assertEqual(decoded, strs, "Should handle empty list")
     
-    def test_all_same_elements(self):
-        nums, k = [5, 5, 5, 5], 1
-        result = self.solution.topKFrequent(nums, k)
-        self.assertEqual(result, [5], "Should return element when all are same")
+    def test_single_string(self):
+        strs = ["Hello"]
+        encoded = self.solution.encode(strs)
+        decoded = self.solution.decode(encoded)
+        self.assertEqual(decoded, strs, "Should handle single string")
     
-    def test_k_equals_distinct_count(self):
-        nums, k = [1, 2, 3], 3
-        result = self.solution.topKFrequent(nums, k)
-        result.sort()
-        expected = [1, 2, 3]
-        expected.sort()
-        self.assertEqual(result, expected, "Should return all elements when k equals distinct count")
+    def test_multiple_strings(self):
+        strs = ["", "test", "hello", "world"]
+        encoded = self.solution.encode(strs)
+        decoded = self.solution.decode(encoded)
+        self.assertEqual(decoded, strs, "Should handle multiple strings including empty string")
     
-    def test_negative_numbers(self):
-        nums, k = [-1, -1, -2, -2, -2], 2
-        result = self.solution.topKFrequent(nums, k)
-        result.sort()
-        expected = [-2, -1]
-        expected.sort()
-        self.assertEqual(result, expected, "Should handle negative numbers")
+    def test_strings_with_special_characters(self):
+        strs = ["Hello#World", "test#123", "abc"]
+        encoded = self.solution.encode(strs)
+        decoded = self.solution.decode(encoded)
+        self.assertEqual(decoded, strs, "Should handle strings containing delimiter character")
     
-    def test_mixed_frequencies(self):
-        nums, k = [1, 1, 1, 2, 2, 3], 2
-        result = self.solution.topKFrequent(nums, k)
-        result.sort()
-        expected = [1, 2]
-        expected.sort()
-        self.assertEqual(result, expected, "Should return top k elements with different frequencies")
+    def test_long_strings(self):
+        strs = ["a" * 100, "b" * 50, "c" * 25]
+        encoded = self.solution.encode(strs)
+        decoded = self.solution.decode(encoded)
+        self.assertEqual(decoded, strs, "Should handle long strings correctly")
     
-    def test_large_input(self):
-        nums = [1] * 100 + [2] * 50 + [3] * 25
-        k = 2
-        result = self.solution.topKFrequent(nums, k)
-        result.sort()
-        expected = [1, 2]
-        expected.sort()
-        self.assertEqual(result, expected, "Should handle large input correctly")
+    def test_mixed_length_strings(self):
+        strs = ["", "a", "ab", "abc", "abcd"]
+        encoded = self.solution.encode(strs)
+        decoded = self.solution.decode(encoded)
+        self.assertEqual(decoded, strs, "Should handle strings of varying lengths")
+    
+    def test_strings_with_numbers(self):
+        strs = ["123", "456", "789"]
+        encoded = self.solution.encode(strs)
+        decoded = self.solution.decode(encoded)
+        self.assertEqual(decoded, strs, "Should handle numeric strings")
+    
+    def test_all_empty_strings(self):
+        strs = ["", "", ""]
+        encoded = self.solution.encode(strs)
+        decoded = self.solution.decode(encoded)
+        self.assertEqual(decoded, strs, "Should handle multiple empty strings")
 
 # Custom Test Runner
 class CustomTestRunner(unittest.TextTestRunner):
