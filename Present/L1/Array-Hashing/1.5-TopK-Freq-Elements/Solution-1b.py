@@ -36,7 +36,6 @@ Topics:
 #Default Libraries ------------- Try to get 99% Percentile Time/Space
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import unittest
 from typing import List
 
@@ -105,7 +104,7 @@ class Solution: # Built-In
         returnArray = [0] * k
         # Pop the top k elements from the heap - k log n time - Which is better than n log n time in 
         for i in range(k):
-            returnArray[i] = heapq.heappop(heap)[1]
+            returnArray[i] = heapq.heappop(heap)[1] # [1] is the number, [0] is the frequency
         
         return returnArray 
 

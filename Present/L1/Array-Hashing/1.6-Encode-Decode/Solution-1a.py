@@ -119,7 +119,33 @@ class Solution: # Built-In
         return encoded_string
 
     def decode(self, s: str) -> List[str]:
-        pass
+        decoded_list = []
+        index = 0
+        beginRead = False
+        length = ""
+        while index != len(s):
+            if beginRead == False:
+                if s[index] == '#':
+                    beginRead = True
+                else:
+                    length += s[index]
+                index += 1
+                
+            else:
+                decoded_list.append(s[index:index+int(length)])
+                index += int(length)
+                length = ""
+                beginRead = False
+
+        # Edge Case: Last string is 0# - We were expecting more after the # but there was nothing. Therefore we get BeginRead = True but no more characters to read.
+        # This breaks the while loop, so we need to add the last string manually.
+        if beginRead == True: #Meaning last string is 0#
+            decoded_list.append(s[index-1:(index-1)+int(length)])
+            index += int(length)
+            length = ""
+            beginRead = False
+
+        return decoded_list
 
 # Test Cases ======================================
 class UnitTest(unittest.TestCase):

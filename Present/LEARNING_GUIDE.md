@@ -1,12 +1,12 @@
 # How to Develop Optimal Problem-Solving Thinking
 
-## 🎯 The Core Problem: "How did they think of that?"
+## The Core Problem: "How did they think of that?"
 
 When you see an optimal solution, it often feels like magic. But it's actually pattern recognition + systematic thinking.
 
 ---
 
-## 📚 Step 1: Build a Problem-Solving Framework
+## Step 1: Build a Problem-Solving Framework
 
 ### A. Start with the Naive Solution (Always!)
 
@@ -50,37 +50,37 @@ For every problem, ask these questions:
 
 ---
 
-## 🧠 Step 2: Pattern Recognition
+## Step 2: Pattern Recognition
 
 ### Common Optimization Patterns
 
 #### Pattern 1: "Only Process What's Necessary"
 **Example:** Longest Consecutive Sequence
-- ❌ Naive: Check every element
-- ✅ Optimal: Only check sequence starts
+- Naive: Check every element
+- Optimal: Only check sequence starts
 - **Key Insight:** Filter before processing
 
 #### Pattern 2: "Precompute and Store"
 **Example:** Two Sum, Contains Duplicate
-- ❌ Naive: Nested loops
-- ✅ Optimal: Hash map/set for O(1) lookups
+- Naive: Nested loops
+- Optimal: Hash map/set for O(1) lookups
 - **Key Insight:** Trade space for time
 
 #### Pattern 3: "Work Backwards or from Ends"
 **Example:** Trapping Rain Water, Product Except Self
-- ❌ Naive: Calculate everything repeatedly
-- ✅ Optimal: Prefix/suffix arrays
+- Naive: Calculate everything repeatedly
+- Optimal: Prefix/suffix arrays
 - **Key Insight:** Build up information incrementally
 
 #### Pattern 4: "Two Pointers / Sliding Window"
 **Example:** Valid Palindrome, Container With Most Water
-- ❌ Naive: Check all pairs
-- ✅ Optimal: Move pointers based on conditions
+- Naive: Check all pairs
+- Optimal: Move pointers based on conditions
 - **Key Insight:** Eliminate impossible candidates
 
 ---
 
-## 🔄 Step 3: Active Learning Process
+## Step 3: Active Learning Process
 
 ### When You See a Solution You Don't Understand:
 
@@ -113,7 +113,7 @@ For every problem, ask these questions:
 
 ---
 
-## 📖 Step 4: Review Strategy
+## Step 4: Review Strategy
 
 ### Daily Review (First Week)
 
@@ -155,7 +155,7 @@ For every problem, ask these questions:
 
 ---
 
-## 🎓 Step 5: Build Your Pattern Library
+## Step 5: Build Your Pattern Library
 
 ### Create a Template for Each Pattern
 
@@ -216,7 +216,7 @@ for element in collection:
 
 ---
 
-## 💡 Step 6: Mental Models
+## Step 6: Mental Models
 
 ### Model 1: "Work Minimization"
 **Question:** What's the absolute minimum work I need to do?
@@ -238,7 +238,7 @@ for element in collection:
 
 ---
 
-## 🎯 Step 7: Practice Strategy
+## Step 7: Practice Strategy
 
 ### The 3-Phase Approach
 
@@ -268,7 +268,7 @@ for element in collection:
 
 ---
 
-## 🔍 Step 8: Debugging Your Thinking
+## Step 8: Debugging Your Thinking
 
 ### When You're Stuck:
 
@@ -294,7 +294,7 @@ for element in collection:
 
 ---
 
-## 📝 Step 9: Documentation Template
+## Step 9: Documentation Template
 
 For each problem you solve, document:
 
@@ -328,7 +328,7 @@ For each problem you solve, document:
 
 ---
 
-## 🚀 Quick Action Plan
+## Quick Action Plan
 
 **This Week:**
 1. Pick 3 problems you struggled with
@@ -353,7 +353,7 @@ For each problem you solve, document:
 
 ---
 
-## 💭 Remember
+## Remember
 
 **The goal isn't to memorize solutions - it's to recognize patterns and apply them.**
 
@@ -367,4 +367,38 @@ Every optimal solution has a reason. Your job is to find that reason, understand
 5. Apply optimization
 6. Verify it works
 
-**You'll get better with practice. Trust the process!** 🎯
+**Example: Two Sum Problem**
+
+Problem: Find two numbers that add up to target.
+
+1. **Understand the problem:** Need to find indices of two numbers that sum to target.
+
+2. **Find the naive solution:**
+```python
+for i in range(len(nums)):
+    for j in range(i+1, len(nums)):
+        if nums[i] + nums[j] == target:
+            return [i, j]
+```
+Time: O(n²) - checking every pair
+
+3. **Identify the bottleneck:** We're checking every pair, but we're recalculating what we've already seen. For each number, we're searching through the rest of the array.
+
+4. **Look for patterns:** This is a "lookup" problem - we need to find if `target - current_num` exists. Pattern: "Precompute and Store" - use a hash map for O(1) lookups.
+
+5. **Apply optimization:**
+```python
+seen = {}
+for i, num in enumerate(nums):
+    complement = target - num
+    if complement in seen:
+        return [seen[complement], i]
+    seen[num] = i
+```
+Time: O(n) - single pass with O(1) lookups
+
+6. **Verify it works:** We store each number as we see it, and check if its complement exists. This eliminates the nested loop.
+
+**Key insight:** Instead of searching forward (O(n) per element), we look backward using a hash map (O(1) per element). This is the "Precompute and Store" pattern.
+
+**You'll get better with practice. Trust the process!**
